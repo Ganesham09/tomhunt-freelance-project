@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema({
     required: true,
     enum: ["body", "screen", "back", "full"], // Types of insurance
   },
+  customerAadhar: { type: String, required: true }, // Customer's email
   productImages: { type: [String], default: [] }, // Array of image URLs
   additionalDetails: { type: String, default: "" }, // Optional additional details
   storeId: { type: String, required: true }, // Store ID for reference

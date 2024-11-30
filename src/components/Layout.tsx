@@ -20,7 +20,10 @@ export const Layout: React.FC = () => {
                 className="flex items-center px-2 py-2 text-gray-700 hover:text-gray-900"
               >
                 <Store className="h-6 w-6 mr-2" />
-                <span className="font-semibold">Insurance Claims</span>
+                <span className="font-semibold">
+                  {" "}
+                  Tom Hunt Insurance Claims
+                </span>
               </Link>
             </div>
             <div className="flex items-center">
