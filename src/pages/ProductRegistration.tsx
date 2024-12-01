@@ -39,39 +39,27 @@ export const ProductRegistration: React.FC = () => {
     setLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value);
+      // Create a FormData object to handle file uploads
+      const data = new FormData();
+      images.forEach((image, index) => {
+        data.append(`image_${index}`, image);
       });
 
-      images.forEach((image) => {
-        formDataToSend.append("images", image);
+      // Append other form data
+      Object.keys(formData).forEach((key) => {
+        data.append(key, formData[key as keyof typeof formData]);
       });
 
-      formDataToSend.append("storeId", user?.id || "");
-
-      await axios.post("/api/products", formDataToSend, {
+      // Make the API request to register the product
+      const response = await axios.post("/api/register-product", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      setFormData({
-        imei: "",
-        model: "",
-        brand: "",
-        price: "",
-        customerName: "",
-        customerPhone: "",
-        customerEmail: "",
-        insuranceType: "body",
-        additionalDetails: "",
-      });
-      setImages([]);
-      alert("Product registered successfully!");
+      console.log("Product registered successfully:", response.data);
     } catch (error) {
       console.error("Error registering product:", error);
-      alert("Failed to register product. Please try again.");
     } finally {
       setLoading(false);
     }
